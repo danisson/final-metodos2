@@ -3,7 +3,8 @@
 Resolver problemas de valor incial aplicado a um sistema massa-mola.
 Sendo necessário implementação, relatório e apresentação.
 
-![](./apresentação/enunciado.png)
+<!-- Gambiarra para centralizar a imagem -->
+<p align="center"><img src="./apresentação/enunciado.png"/></p>
 
 Os métodos usados serão:
 
