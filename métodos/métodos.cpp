@@ -15,4 +15,9 @@ double chp::BackwardEuler::operator()(double x) {
 	return 0;
 }
 
-double chp::pontoFixo(funcaoReal f,double epsilon);
+double chp::pontoFixo(funcaoReal f,double epsilon, double x0){
+	double x = x0;
+	while(fabs(f(x) - x)) <= epsilon){
+		x = f(x);
+	}
+};
