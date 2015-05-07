@@ -28,5 +28,13 @@ namespace chp {
 		double operator()(double x);
 	};
 
+	class EulerModificado : ResolvedorEDO {
+	protected:
+		const double epsilon;
+	public:
+		EulerModificado(equacaoDiferencial f,double y0,double step,double epsilon) : ResolvedorEDO(f,y0,step),epsilon(epsilon) {};
+		double operator()(double x);
+	}
+
 	double pontoFixo(funcaoReal,double,double);
 }
