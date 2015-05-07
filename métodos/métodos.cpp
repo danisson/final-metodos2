@@ -11,8 +11,10 @@ double chp::ForwardEuler::operator()(double x) {
 double chp::BackwardEuler::operator()(double x) {
 	// (yn+1)^0 = yn
 	// (yn+1)^k = yn + step*f((yn+1)^k-1,x)
-	assert(false);
-	return 0;
+	double y = y0;
+	for (double i = 0; fabs(x-i) >= step; i+=step)
+		y += chp::pontoFixo([&](double yn){return y+step*f(yn,i+step)},epsilon,y);
+	return y;
 }
 
 double chp::EulerModificado::operator()(double x){
