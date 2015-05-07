@@ -34,7 +34,7 @@ namespace chp {
 	public:
 		EulerModificado(equacaoDiferencial f,double y0,double step,double epsilon) : ResolvedorEDO(f,y0,step),epsilon(epsilon) {};
 		double operator()(double x);
-	}
+	};
 
 	double pontoFixo(funcaoReal,double,double);
 }
