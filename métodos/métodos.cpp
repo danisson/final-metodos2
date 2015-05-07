@@ -1,5 +1,6 @@
 #include "métodos.h"
 #include <cassert>
+#include <cmath>
 
 double chp::ForwardEuler::operator()(double x) {
 	double y = y0;

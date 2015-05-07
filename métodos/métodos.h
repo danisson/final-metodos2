@@ -1,5 +1,3 @@
-#include <cstdio>
-#include <cmath>
 #include <functional>
 
 namespace chp {
