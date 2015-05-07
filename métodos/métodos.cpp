@@ -1,4 +1,5 @@
 #include "métodos.h"
+#include <cassert>
 
 double chp::ForwardEuler::operator()(double x) {
 	double y = y0;
@@ -13,3 +14,5 @@ double chp::BackwardEuler::operator()(double x) {
 	assert(false);
 	return 0;
 }
+
+double chp::pontoFixo(funcaoReal f,double epsilon);

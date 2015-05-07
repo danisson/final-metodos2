@@ -1,7 +1,6 @@
 #include <cstdio>
 #include <cmath>
 #include <functional>
-#include <cassert>
 
 namespace chp {
 	typedef std::function<double(double,double)> equacaoDiferencial;
@@ -30,4 +29,6 @@ namespace chp {
 		BackwardEuler(equacaoDiferencial f,double y0,double step,double epsilon) : ResolvedorEDO(f,y0,step),epsilon(epsilon) {};
 		double operator()(double x);
 	};
+
+	double pontoFixo(funcaoReal,double);
 }
