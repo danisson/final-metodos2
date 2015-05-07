@@ -28,5 +28,5 @@ namespace chp {
 		double operator()(double x);
 	};
 
-	double pontoFixo(funcaoReal,double);
+	double pontoFixo(funcaoReal,double,double);
 }
