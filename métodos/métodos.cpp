@@ -36,3 +36,13 @@ double chp::pontoFixo(funcaoReal f, double epsilon, double x0) {
 	}
 	return f(x);
 }
+
+double chp::RungeKutta::operator()(double x){
+	double yn1 = y0, k1, k2;
+	for (double i=0;fabs(x-i)>=step;i+=step){
+		k1 = step*f(yn1,i);
+		k2 = step*f(yn1+k1,i+step);
+		yn1 = yn1 + (k1+k2)/2;
+	} 
+	return yn1;
+}
