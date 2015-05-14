@@ -29,6 +29,16 @@ double chp::EulerModificado::operator()(double x){
 	return yn1;
 }
 
+double chp::RungeKutta::operator()(double x){
+	double yn1 = y0, k1, k2;
+	for (double i=0;fabs(x-i)>=step;i+=step){
+		k1 = step*f(yn1,i);
+		k2 = step*f(yn1+k1,i+step);
+		yn1 = yn1 + (k1+k2)/2;
+	}
+	return yn1;
+}
+
 double chp::RungeKutta3::operator()(double x) {
 	double y = y0, k[3];
 	for (double i = 0; fabs(x-i) >= step; i+=step) {
@@ -46,14 +56,4 @@ double chp::pontoFixo(funcaoReal f, double epsilon, double x0) {
 		x = f(x);
 	}
 	return f(x);
-}
-
-double chp::RungeKutta::operator()(double x){
-	double yn1 = y0, k1, k2;
-	for (double i=0;fabs(x-i)>=step;i+=step){
-		k1 = step*f(yn1,i);
-		k2 = step*f(yn1+k1,i+step);
-		yn1 = yn1 + (k1+k2)/2;
-	} 
-	return yn1;
 }
