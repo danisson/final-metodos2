@@ -33,8 +33,8 @@ double chp::RungeKutta3::operator()(double x) {
 	double y = y0, k[3];
 	for (double i = 0; fabs(x-i) >= step; i+=step) {
 		k[0] = step*f(y,i);
-		k[1] = step*f(y+k1/2,i+(step/2));
-		k[2] = step*f(y-k1+2*k2,i+step);
+		k[1] = step*f(y+k[0]/2,i+(step/2));
+		k[2] = step*f(y-k[0]+2*k[1],i+step);
 		y += (k[0]+4*k[1]+k[2])/6;
 	}
 	return y;
