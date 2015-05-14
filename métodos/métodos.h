@@ -36,6 +36,12 @@ namespace chp {
 		double operator()(double x);
 	};
 
+	class RungeKutta : ResolvedorEDO {
+	public:
+		RungeKutta(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
+		double operator()(double x);
+	};
+	
 	class RungeKutta3 : ResolvedorEDO {
 	public:
 		RungeKutta3(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
