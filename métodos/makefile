@@ -7,10 +7,13 @@ CC = g++
 #  -std=c+11 usa o standard mais recente
 CFLAGS  = -g -Wall -std=c++11 -L lib
 
-default: clean main
+default: testar
+
+testar: bin/testes
+	bin/testes -s --force-colour -d yes | less -Sr
 
 bin/métodos.o: métodos.cpp métodos.h
 	$(CC) $(CFLAGS) -c métodos.cpp -o bin/métodos.o
 
-bin/testes: testes.cpp bin/métodos.o métodos.cpp
+bin/testes: testes.cpp bin/métodos.o métodos.cpp catch/catch.hpp
 	$(CC) $(CFLAGS) testes.cpp bin/métodos.o -o bin/testes
