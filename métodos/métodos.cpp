@@ -50,6 +50,20 @@ double chp::RungeKutta3::operator()(double x) {
 	return y;
 }
 
+double chp::RungeKutta4::operator()(double x) {
+	double y = y0, k[4];
+
+	for (double i = 0; fabs(x-i) >= step; i+=step) {
+		k[0] = step * f(y, i);
+		k[1] = step * f(y + k[0]/3, i + step/3); 
+		k[2] = step * f(y + k[0]/3 + k[1]/3, i + 2*step/3);
+		k[3] = step * f(y + k[0] - k[1] + k[2], i + step);
+		y += (k[0] + 3*k[1] + 3*k[2] + k[3])/8;
+	}
+
+	return y;	
+}
+
 double chp::pontoFixo(funcaoReal f, double epsilon, double x0) {
 	double x = x0;
 	while(fabs(f(x) - x) >= epsilon) {
