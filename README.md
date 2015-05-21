@@ -13,7 +13,7 @@ Os métodos usados serão:
 * Preditor-Corretor de Adams: terceira e quarta ordem.
 
 ## Implementação
-Esta implementação em particular vai ser feita em C++.
+A implementação dos métodos númericos será feita em C++11 e a vizualização dos resultados será em Python2 usando a biblioteca Pygame.
 
 ## Relatório
 O relatório contém a descrição do problema tratado, a descrição do que cada membro da equipe fez e a análise dos resultados que compare o tempo e a estabilidade dos diferentes métodos.
