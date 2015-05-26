@@ -17,8 +17,10 @@ TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 	auto forward = chp::ForwardEuler(F,y0,step);
 	auto backward = chp::BackwardEuler(F,y0,step,epsilon);
 	auto rk4 = chp::RungeKutta4(F,y0,step);
+	auto predCorr = chp::PreditorCorretor3(F,y0,step);
 	
 	REQUIRE(forward(x) == Approx(y));
 	REQUIRE(backward(x) == Approx(y));
 	REQUIRE(rk4(x) == Approx(y));
+	REQUIRE(predCorr(x) == Approx(y));
 }

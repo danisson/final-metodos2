@@ -54,5 +54,11 @@ namespace chp {
 		double operator()(double x);
 	};
 
+	class PreditorCorretor3 : ResolvedorEDO {
+	public:
+		PreditorCorretor3(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
+		double operator()(double x);
+	};
+
 	double pontoFixo(funcaoReal,double,double);
 }
