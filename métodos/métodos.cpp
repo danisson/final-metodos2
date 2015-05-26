@@ -64,6 +64,48 @@ double chp::RungeKutta4::operator()(double x) {
 	return y;	
 }
 
+double chp::PreditorCorretor3::operator()(double x) {
+	double yDeriv[4], y[4], i = 0;
+	
+	y[0] = y0;
+	yDeriv[0] = f(y[0], i);
+	
+	y[1] = y[0] + step*f(y[0], i);
+	i += step;
+	yDeriv[1] = f(y[1], i);
+
+	if (fabs(x-i) < step) {
+		return y[1]; 
+	}
+
+	y[2] = y[1] + step*f(y[1], i);
+	i += step;
+	yDeriv[2] = f(y[2], i);
+
+	if (fabs(x-i) < step) {
+		return y[2]; 
+	}
+ 
+	while (fabs(x-i) >= step) {
+		//Predição
+		y[3] = y[2] + (step/12) * (23*yDeriv[2] - 16*yDeriv[1] + 5*yDeriv[0]);
+		i += step;
+		yDeriv[3] = f(y[3], i);
+
+		//Correção
+		y[3] = y[2] + (step/12) * (5*yDeriv[3] + 8*yDeriv[2] - yDeriv[1]);
+		yDeriv[3] = f(y[3], i);
+
+		//Atualização
+		for (int i = 0; i < 3; i++){
+			y[i] = y[i+1];
+			yDeriv[i] = yDeriv[i+1];
+		}
+	}
+
+	return y[3]; 
+}
+
 double chp::pontoFixo(funcaoReal f, double epsilon, double x0) {
 	double x = x0;
 	while(fabs(f(x) - x) >= epsilon) {
