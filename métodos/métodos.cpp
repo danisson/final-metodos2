@@ -97,13 +97,49 @@ double chp::PreditorCorretor3::operator()(double x) {
 		yDeriv[3] = f(y[3], i);
 
 		//Atualização
-		for (int i = 0; i < 3; i++){
-			y[i] = y[i+1];
-			yDeriv[i] = yDeriv[i+1];
+		for (int j = 0; j < 3; j++){
+			y[j] = y[j+1];
+			yDeriv[j] = yDeriv[j+1];
 		}
 	}
 
 	return y[3]; 
+}
+
+double chp::PreditorCorretor4::operator()(double x) {
+	double yDeriv[5], y[5], t = 0;
+	
+	y[0] = y0;
+	yDeriv[0] = f(y[0], t);
+ 
+	for (int j = 1; j < 4; j++){
+		y[j] = y[j-1] + step*f(y[j-1], t);
+		t += step;
+		yDeriv[j] = f(y[j], t);
+
+		if (fabs(x-t) < step) {
+			return y[j];
+		} 
+	}
+
+	while (fabs(x-t) >= step) {
+		//Predição
+		y[4] = y[3] + (step/24) * (55*yDeriv[3] - 59*yDeriv[2] + 37*yDeriv[1] - 9*yDeriv[0]);
+		t += step;
+		yDeriv[4] = f(y[4], t);
+
+		//Correção
+		y[4] = y[3] + (step/24) * (9*yDeriv[4] + 19*yDeriv[3] - 5*yDeriv[2] + yDeriv[1]);
+		yDeriv[4] = f(y[4], t);
+
+		//Atualização
+		for (int j = 0; j < 4; j++){
+			y[j] = y[j+1];
+			yDeriv[j] = yDeriv[j+1];
+		}
+	}
+
+	return y[4]; 
 }
 
 double chp::pontoFixo(funcaoReal f, double epsilon, double x0) {
