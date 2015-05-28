@@ -14,9 +14,10 @@ def lerArquivoAnimacao(nomeArquivo):
 		animacao = []
 		
 		for linha in linhasArquivo:
-			y = float(linha)
-			animacao.append([0,y])
+			[y0,y1] = map(float,linha.split(','))
+			animacao.append(((0.0,y0),(0.0,y1)))
 
+		animacao = map(list,zip(*animacao))
 		return passo, animacao
 
 	except Exception, e:
@@ -34,8 +35,10 @@ def renderizar(passo, animacao):
 
 	passoAtual = 0
 
-	caixa1 = Massa(20, 10, cores["VERDE"], animacao, tela)
+	caixa1 = Massa(20, 10, cores["VERDE"], animacao[0], tela)
+	caixa2 = Massa(20, 10, cores["AZUL"], animacao[1], tela)
 
+	print passo*10
 	aberto = True
 	relogio = pygame.time.Clock()
 	while aberto:
@@ -44,10 +47,11 @@ def renderizar(passo, animacao):
 				aberto = False
 				break
 
-			tela.fill(cores["BRANCO"])
-			caixa1.desenharProxPosicao()
-			pygame.display.flip()
-			relogio.tick(passo/10)
+		tela.fill(cores["BRANCO"])
+		caixa1.desenharProxPosicao()
+		caixa2.desenharProxPosicao()
+		pygame.display.flip()
+		relogio.tick((1+(20/passo))/5)
 
 def main():
 	nomeArquivo = sys.argv[1]
