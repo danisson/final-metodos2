@@ -5,24 +5,20 @@
 
 
 TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
-	chp::equacaoDiferencial F = [](double y, double x){return -y;};
+	tnw::MatrizQuadrada F = {{-1,0},{0,-1}};
 
 	const double step = 1e-4,
 	             epsilon = 1e-1,
 	             x = 6.0;
 
-	const double y = 0.002478752176666,
-	             y0 = 1;
+	const double y = 0.002478752176666;
+	tnw::Vetor y0 = {1,1};
 
 	auto forward = chp::ForwardEuler(F,y0,step);
 	auto backward = chp::BackwardEuler(F,y0,step,epsilon);
-	auto rk4 = chp::RungeKutta4(F,y0,step);
-	auto predCorr3 = chp::PreditorCorretor3(F,y0,step);
-	auto predCorr4 = chp::PreditorCorretor4(F,y0,step);
+	auto rForward = forward(x);
+	auto rBackward = backward(x);
 
-	REQUIRE(forward(x) == Approx(y));
-	REQUIRE(backward(x) == Approx(y));
-	REQUIRE(rk4(x) == Approx(y));
-	REQUIRE(predCorr3(x) == Approx(y));
-	REQUIRE(predCorr4(x) == Approx(y));
+	REQUIRE(rForward(0) == Approx(y));
+	REQUIRE(rBackward(1) == Approx(y));
 }

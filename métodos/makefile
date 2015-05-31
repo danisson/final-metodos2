@@ -15,5 +15,5 @@ testar: bin/testes
 bin/métodos.o: métodos.cpp métodos.h
 	$(CC) $(CFLAGS) -c métodos.cpp -o bin/métodos.o
 
-bin/testes: testes.cpp bin/métodos.o métodos.cpp hlibs/catch.hpp
-	$(CC) $(CFLAGS) testes.cpp bin/métodos.o -o bin/testes
+bin/testes: testes.cpp bin/métodos.o métodos.cpp hlibs/catch.hpp lib/libmatriz.a
+	$(CC) $(CFLAGS) testes.cpp bin/métodos.o -o bin/testes -lmatriz
