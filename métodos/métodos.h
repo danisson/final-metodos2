@@ -2,7 +2,6 @@
 #include "matrizes/matrizes.h"
 
 namespace chp {
-	typedef std::function<double(double,double)> equacaoDiferencial;
 	typedef std::function<tnw::Vetor(tnw::Vetor)> funcaoReal;
 
 	class ResolvedorEDO {
@@ -37,17 +36,17 @@ namespace chp {
 		tnw::Vetor operator()(double x);
 	};
 
-	// class RungeKutta : ResolvedorEDO {
-	// public:
-	// 	RungeKutta(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
-	// 	double operator()(double x);
-	// };
+	class RungeKutta : ResolvedorEDO {
+	public:
+		RungeKutta(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {};
+		tnw::Vetor operator()(double x);
+	};
 	
-	// class RungeKutta3 : ResolvedorEDO {
-	// public:
-	// 	RungeKutta3(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
-	// 	double operator()(double x);
-	// };
+	class RungeKutta3 : ResolvedorEDO {
+	public:
+		RungeKutta3(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {};
+		tnw::Vetor operator()(double x);
+	};
 
 	class RungeKutta4 : ResolvedorEDO {
 	public:
@@ -55,17 +54,17 @@ namespace chp {
 		tnw::Vetor operator()(double x);
 	};
 
-	// class PreditorCorretor3 : ResolvedorEDO {
-	// public:
-	// 	PreditorCorretor3(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
-	// 	double operator()(double x);
-	// };
+	class PreditorCorretor3 : ResolvedorEDO {
+	public:
+		PreditorCorretor3(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {};
+		tnw::Vetor operator()(double x);
+	};
 
-	// class PreditorCorretor4 : ResolvedorEDO {
-	// public:
-	// 	PreditorCorretor4(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
-	// 	double operator()(double x);
-	// };
+	class PreditorCorretor4 : ResolvedorEDO {
+	public:
+		PreditorCorretor4(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {};
+		tnw::Vetor operator()(double x);
+	};
 
 	tnw::Vetor pontoFixo(funcaoReal,double,tnw::Vetor);
 }
