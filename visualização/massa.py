@@ -11,11 +11,13 @@ class Massa():
 
 		self.posicaoAtual = 0
 		self.offsetX = tela.get_width() / 2
-
-	def desenharPosicao(self,posicaoAnimacao):
-		posx, posy = self.animacao[posicaoAnimacao]
-		pygame.draw.rect(self.tela, self.cor, (posx+self.offsetX, posy, self.largura, self.altura), 0)
+		
+		self.retangulo = pygame.Rect(animacao[self.posicaoAtual][0]-largura/2+self.offsetX,animacao[self.posicaoAtual][1]+altura/2,largura,altura)		
+		
 		
 	def desenharProxPosicao(self):
-		self.desenharPosicao(self.posicaoAtual)
-		self.posicaoAtual = (self.posicaoAtual + 1)%len(self.animacao) 
+		
+		pygame.draw.rect(self.tela,self.cor,self.retangulo)		
+		self.posicaoAtual = (self.posicaoAtual + 1)%len(self.animacao)		
+		self.retangulo.x, self.retangulo.y = (self.animacao[self.posicaoAtual][0]+self.offsetX-self.largura/2,self.animacao[self.posicaoAtual][1]+self.altura/2)
+		print str(self.retangulo.x) + " " + str(self.retangulo.y)
