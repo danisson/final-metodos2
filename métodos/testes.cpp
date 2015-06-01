@@ -10,9 +10,10 @@ TEST_CASE("Vetor vazio recebe outros vetores","[matriz]") {
 	REQUIRE(v1 == v2);
 }
 
-TEST_CASE("Vetor não-vazio não recebe outros vetores","[matriz]") {
+TEST_CASE("Vetor não-vazio recebem outros vetores","[matriz]") {
 	tnw::Vetor v1 = {1,2,4}, v2 = {1,2,3};
-	REQUIRE_THROWS_AS(v1 = v2,std::out_of_range);
+	v1 = v2;
+	REQUIRE(v1 == v2);
 }
 
 TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
