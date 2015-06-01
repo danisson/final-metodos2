@@ -3,27 +3,6 @@
 #include <cmath>
 #include <cstdio>
 
-tnw::Vetor tnw::MatrizQuadrada::operator()(tnw::Vetor v) const {
-	return (*this) * v;
-}
-
-
-tnw::Vetor operator* (const double x,const tnw::Vetor& v) {
-	tnw::Vetor r = v;
-	for (unsigned i = 0; i < r.getTamanho(); ++i) {
-		r(i) *= x;
-	}
-	return r;
-}
-
-tnw::Vetor operator* (const tnw::Vetor& v,const double x) {
-	return x * v;
-}
-
-tnw::Vetor operator/ (const tnw::Vetor& v,const double x) {
-	return v * (1/x);
-}
-
 tnw::Vetor chp::ForwardEuler::operator()(double x) {
 	tnw::Vetor y = y0;
 	for (double i = 0; fabs(x-i) >= step; i+=step) {

@@ -61,5 +61,8 @@ tnw::Vetor operator* (const tnw::MatrizQuadrada& m,const tnw::Vetor& v);
 tnw::Vetor operator+ (const tnw::Vetor& e,const tnw::Vetor& d);
 tnw::Vetor operator- (const tnw::Vetor& e,const tnw::Vetor& d);
 bool operator==(const tnw::Vetor& e,const tnw::Vetor& d);
+tnw::Vetor operator* (const double x,const tnw::Vetor& v);
+tnw::Vetor operator* (const tnw::Vetor& v,const double x);
+tnw::Vetor operator/ (const tnw::Vetor& v,const double x);
 
 #endif

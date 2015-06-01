@@ -1,5 +1,5 @@
 #include <functional>
-#include "matrizes.h"
+#include "matrizes/matrizes.h"
 
 namespace chp {
 	typedef std::function<double(double,double)> equacaoDiferencial;
