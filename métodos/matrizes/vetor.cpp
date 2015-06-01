@@ -19,6 +19,10 @@ unsigned tnw::Vetor::getTamanho() const {
 	return tamanho;
 }
 
+const std::vector<double>& tnw::Vetor::getVetor() const {
+	return v;
+}
+
 std::string tnw::Vetor::toString() const {
 	std::string output,aux;
 	for (unsigned i = 0; i < tamanho; ++i)
@@ -54,4 +58,11 @@ tnw::Vetor::Vetor(unsigned n) {
 tnw::Vetor::Vetor(std::initializer_list<double> l) {
 	tamanho = l.size();
 	v.insert(v.end(), l.begin(), l.end());
+}
+
+tnw::Vetor& tnw::Vetor::operator=(const tnw::Vetor& d) {
+	if (tamanho > 0) throw std::out_of_range("Vetor já incializado");
+	tamanho = d.getTamanho();
+	v = d.getVetor();
+	return *this;
 }

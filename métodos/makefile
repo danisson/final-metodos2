@@ -12,6 +12,9 @@ default: testar
 testar: bin/testes
 	bin/testes -s --force-colour -d yes | less -Sr
 
+testarMatriz: bin/testes
+	bin/testes -s --force-colour -d yes [matriz] | less -Sr
+
 bin/métodos.o: métodos.cpp métodos.h
 	$(CC) $(CFLAGS) -c métodos.cpp -o bin/métodos.o
 

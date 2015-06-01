@@ -4,6 +4,17 @@
 #include <cmath>
 
 
+TEST_CASE("Vetor vazio recebe outros vetores","[matriz]") {
+	tnw::Vetor v1, v2 = {1,2,3};
+	v1 = v2;
+	REQUIRE(v1 == v2);
+}
+
+TEST_CASE("Vetor não-vazio não recebe outros vetores","[matriz]") {
+	tnw::Vetor v1 = {1,2,4}, v2 = {1,2,3};
+	REQUIRE_THROWS_AS(v1 = v2,std::out_of_range);
+}
+
 TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 	tnw::MatrizQuadrada F = {{-1,0},{0,-1}};
 

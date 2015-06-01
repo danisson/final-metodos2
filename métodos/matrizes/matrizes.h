@@ -16,10 +16,14 @@ namespace tnw
 		double operator()(unsigned i) const;
 		double& operator()(unsigned i);
 		unsigned getTamanho() const;
+		const std::vector<double>& getVetor() const;
 
 		std::string toString() const;
 		std::string toJSON() const;
 
+		Vetor& operator=(const Vetor&);
+
+		Vetor() : tamanho(0) {};
 		Vetor(unsigned n);
 		Vetor(std::initializer_list<double> v);
 	};
