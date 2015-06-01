@@ -29,13 +29,13 @@ namespace chp {
 		tnw::Vetor operator()(double x);
 	};
 
-	// class EulerModificado : ResolvedorEDO {
-	// protected:
-	// 	const double epsilon;
-	// public:
-	// 	EulerModificado(equacaoDiferencial f,double y0,double step,double epsilon) : ResolvedorEDO(f,y0,step),epsilon(epsilon) {};
-	// 	double operator()(double x);
-	// };
+	class EulerModificado : ResolvedorEDO {
+	protected:
+		const double epsilon;
+	public:
+		EulerModificado(tnw::MatrizQuadrada f,tnw::Vetor y0,double step,double epsilon) : ResolvedorEDO(f,y0,step),epsilon(epsilon) {};
+		tnw::Vetor operator()(double x);
+	};
 
 	// class RungeKutta : ResolvedorEDO {
 	// public:
@@ -49,11 +49,11 @@ namespace chp {
 	// 	double operator()(double x);
 	// };
 
-	// class RungeKutta4 : ResolvedorEDO {
-	// public:
-	// 	RungeKutta4(equacaoDiferencial f,double y0,double step) : ResolvedorEDO(f,y0,step) {};
-	// 	double operator()(double x);
-	// };
+	class RungeKutta4 : ResolvedorEDO {
+	public:
+		RungeKutta4(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {};
+		tnw::Vetor operator()(double x);
+	};
 
 	// class PreditorCorretor3 : ResolvedorEDO {
 	// public:

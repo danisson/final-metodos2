@@ -16,9 +16,38 @@ TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 
 	auto forward = chp::ForwardEuler(F,y0,step);
 	auto backward = chp::BackwardEuler(F,y0,step,epsilon);
-	auto rForward = forward(x);
-	auto rBackward = backward(x);
+	auto modificado = chp::EulerModificado(F,y0,step,epsilon);
+	auto rk4 = chp::RungeKutta4(F,y0,step);
 
-	REQUIRE(rForward(0) == Approx(y));
-	REQUIRE(rBackward(1) == Approx(y));
+
+	REQUIRE(forward(x)(0) == Approx(y));
+	REQUIRE(backward(x)(0) == Approx(y));
+	REQUIRE(modificado(x)(0) == Approx(y));
+	REQUIRE(rk4(x)(0) == Approx(y));
+}
+
+TEST_CASE("y' = y+z; z' = z","[euler][backward]") {
+	tnw::MatrizQuadrada F = {{1,1},{0,1}};
+
+	const double step = 1e-6,
+	             epsilon = 1e-1,
+	             x = 6.0;
+
+	const double y1 = 2824.001554449145;
+	const double y2 = 403.4287934927351;
+	tnw::Vetor y0 = {1,1};
+
+	auto forward = chp::ForwardEuler(F,y0,step);
+	auto backward = chp::BackwardEuler(F,y0,step,epsilon);
+	auto modificado = chp::EulerModificado(F,y0,step,epsilon);
+	auto rk4 = chp::RungeKutta4(F,y0,step);
+
+	auto rforward = forward(x);
+	// auto rbackward = backward(x);
+	// auto rmodificado = modificado(x);
+	// auto rrk4 = rk4(x);
+
+
+	REQUIRE(rforward(0) == Approx(y1));
+	REQUIRE(rforward(1) == Approx(y2));
 }

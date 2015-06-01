@@ -31,6 +31,7 @@ namespace tnw
 		std::vector<double> m;
 	public:
 		double operator()(unsigned i, unsigned j) const;
+		tnw::Vetor operator()(tnw::Vetor) const;
 		double& operator()(unsigned i, unsigned j);
 		unsigned getTamanho() const;
 

@@ -3,6 +3,10 @@
 #include <cmath>
 #include <cstdio>
 
+tnw::Vetor tnw::MatrizQuadrada::operator()(tnw::Vetor v) const {
+	return (*this) * v;
+}
+
 
 tnw::Vetor operator* (const double x,const tnw::Vetor& v) {
 	tnw::Vetor r = v;
@@ -12,10 +16,18 @@ tnw::Vetor operator* (const double x,const tnw::Vetor& v) {
 	return r;
 }
 
+tnw::Vetor operator* (const tnw::Vetor& v,const double x) {
+	return x * v;
+}
+
+tnw::Vetor operator/ (const tnw::Vetor& v,const double x) {
+	return v * (1/x);
+}
+
 tnw::Vetor chp::ForwardEuler::operator()(double x) {
 	tnw::Vetor y = y0;
 	for (double i = 0; fabs(x-i) >= step; i+=step) {
-		y = y + step*(f * y);
+		y = y + step*f(y);
 	}
 	return y;
 }
@@ -25,18 +37,18 @@ tnw::Vetor chp::BackwardEuler::operator()(double x) {
 	// (yn+1)^k = yn + step*f((yn+1)^k-1,x)
 	tnw::Vetor y = y0;
 	for (double i = 0; fabs(x-i) >= step; i+=step) {
-		y = chp::pontoFixo([&](tnw::Vetor yn){return y+step*(f * yn);},epsilon,y);
+		y = chp::pontoFixo([&](tnw::Vetor yn){return y+step*f(yn);},epsilon,y);
 	}
 	return y;
 }
 
-// double chp::EulerModificado::operator()(double x){
-// 	double yn1 = y0;
-// 	for (double i=0; fabs(x-i)>=step; i+=step) {
-// 		yn1 = chp::pontoFixo([&](double yn2){return yn1+(step/2)*(f(yn2,i+step)+f(yn1,i));},epsilon,yn1);
-// 	}
-// 	return yn1;
-// }
+tnw::Vetor chp::EulerModificado::operator()(double x){
+	tnw::Vetor yn1 = y0;
+	for (double i=0; fabs(x-i)>=step; i+=step) {
+		yn1 = chp::pontoFixo([&](tnw::Vetor yn2){return yn1+(step/2)*(f(yn2)+f(yn1));},epsilon,yn1);
+	}
+	return yn1;
+}
 
 // double chp::RungeKutta::operator()(double x){
 // 	double yn1 = y0, k1, k2;
@@ -59,19 +71,20 @@ tnw::Vetor chp::BackwardEuler::operator()(double x) {
 // 	return y;
 // }
 
-// double chp::RungeKutta4::operator()(double x) {
-// 	double y = y0, k[4];
+tnw::Vetor chp::RungeKutta4::operator()(double x) {
+	tnw::Vetor y = y0;
+	tnw::Vetor k[4] = {y,y,y,y};
 
-// 	for (double i = 0; fabs(x-i) >= step; i+=step) {
-// 		k[0] = step * f(y, i);
-// 		k[1] = step * f(y + k[0]/3, i + step/3); 
-// 		k[2] = step * f(y + k[0]/3 + k[1]/3, i + 2*step/3);
-// 		k[3] = step * f(y + k[0] - k[1] + k[2], i + step);
-// 		y += (k[0] + 3*k[1] + 3*k[2] + k[3])/8;
-// 	}
+	for (double i = 0; fabs(x-i) >= step; i+=step) {
+		k[0] = step * f(y);
+		k[1] = step * f(y + k[0]/3); 
+		k[2] = step * f(y + k[0]/3 + k[1]/3);
+		k[3] = step * f(y + k[0] - k[1] + k[2]);
+		y = y + (k[0] + 3*k[1] + 3*k[2] + k[3])/8;
+	}
 
-// 	return y;	
-// }
+	return y;	
+}
 
 // double chp::PreditorCorretor3::operator()(double x) {
 // 	double yDeriv[4], y[4], i = 0;
