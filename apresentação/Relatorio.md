@@ -1,3 +1,4 @@
+
 #Trabalho de Métodos Numéricos II - Relatório
 ##Carolina Herbster - 354044
 ##Daniel Augusto Ramos - 354047
@@ -15,8 +16,8 @@ O problema proposto
 
 <p align="center"><img src="./apresentação/enunciado.png"/></p>
 
-Trata-se de um problema num sistema massa-mola em que o movimento das massas é definido por duas equações diferenciáveis ordinárias e nessas equações estão presentes alguns valores a serem utilizados nos cálculos. A implementação do trabalho foi feita em C++11 com algumas classes reaproveitadas do trabalho da disciplina de [métodos numéricos I](https://github.com/danisson/final-metodos1) e foi usado como controle de versão o [Git](https://github.com/danisson/final-metodos2).
-como foi altamente recomendado se fazer uma simulação que demonstrasse o movimento do sistema, uma simulação foi implementada em Python2 utilizando a biblioteca Pygame.
+Trata-se de um problema num sistema massa-mola em que o movimento das massas é definido por duas equações diferenciáveis ordinárias e nessas equações estão presentes alguns valores a serem utilizados nos cálculos. A implementação do trabalho foi feita em C++11 com algumas classes reaproveitadas do trabalho da disciplina de [métodos numéricos I](https://github.com/danisson/final-metodos1) e foi usado como controle de versão o [Git](https://github.com/danisson/final-metodos2). Cada método numérico é uma classe e há uma classe principal chamada ResolvedorEDO da qual todas as classes dos métodos numéricos herdam pois todos métodos precisarão sempre dos mesmos parâmetros: a função, o passo e o valor inicial.
+Como foi altamente recomendado se fazer uma simulação que demonstrasse o movimento do sistema, uma simulação foi implementada em Python2 utilizando a biblioteca Pygame.
 
 ###Divisão do trabalho
 | Membro da Equipe 			| Parte do trabalho 										                   	|
@@ -25,6 +26,7 @@ como foi altamente recomendado se fazer uma simulação que demonstrasse o movim
 |							| Implementação do método de Runge-Kutta de quarta ordem						|
 |							| Implementação do método Preditor-Corretor de Adams de terceira e quarta ordem	|
 |							| Implementação da visualização													|
+|							| Implementação do menu															|
 | Daniel Augusto Ramos		| Implementação do método Euler forward											|
 |							| Implementação do método de Runge-Kutta de terceira ordem						|
 |							| Correção de bugs																|
