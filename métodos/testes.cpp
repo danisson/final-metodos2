@@ -35,9 +35,6 @@ TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 	auto predcorr3 = chp::PreditorCorretor3(F,y0,step);
 	auto predcorr4 = chp::PreditorCorretor4(F,y0,step);
 
-	
-
-
 	REQUIRE(chp::aplicarMetodo(forward,x)(0) == Approx(y));
 	REQUIRE(chp::aplicarMetodo(backward,x)(0) == Approx(y));
 	REQUIRE(chp::aplicarMetodo(modificado,x)(0) == Approx(y));

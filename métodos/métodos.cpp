@@ -43,7 +43,7 @@ chp::ResolvedorEDO& chp::RungeKutta4::operator++() {
 	tnw::Vetor k[4];
 
 	k[0] = step * f(y0);
-	k[1] = step * f(y0 + k[0]/3); 
+	k[1] = step * f(y0 + k[0]/3);
 	k[2] = step * f(y0 + k[0]/3 + k[1]/3);
 	k[3] = step * f(y0 + k[0] - k[1] + k[2]);
 	y0 = y0 + (k[0] + 3*k[1] + 3*k[2] + k[3])/8;
@@ -67,7 +67,7 @@ chp::ResolvedorEDO& chp::PreditorCorretor3::operator++() {
 	yDeriv[0] = yDeriv[1];
 	y[1] = y[2];
 	yDeriv[1] = yDeriv[2];
-	
+
 	y[2] = yProx;
 	yDeriv[2] = yDerivProx;
 

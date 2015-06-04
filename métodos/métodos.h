@@ -64,7 +64,7 @@ namespace chp {
 		PreditorCorretor3(tnw::MatrizQuadrada f,tnw::Vetor y0,double step) : ResolvedorEDO(f,y0,step) {
 			y[0] = y0;
 			yDeriv[0] = f(y[0]);
-			
+
 			y[1] = y[0] + step*f(y[0]);
 			yDeriv[1] = f(y[1]);
 
