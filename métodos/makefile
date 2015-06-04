@@ -7,7 +7,13 @@ CC = g++
 #  -std=c+11 usa o standard mais recente
 CFLAGS  = -g -Wall -std=c++11 -L lib
 
-default: testar
+default: main
+
+bin/main: main.cpp bin/métodos.o lib/libmatriz.a 
+	$(CC) $(CFLAGS) main.cpp bin/métodos.o -o bin/main -lmatriz
+
+main: bin/main
+	bin/main
 
 testar: bin/testes
 	bin/testes -s --force-colour -d yes | less -Sr
