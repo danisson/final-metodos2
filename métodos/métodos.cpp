@@ -113,3 +113,10 @@ tnw::Vetor chp::aplicarMetodo(chp::ResolvedorEDO& metodo, double x) {
 	}
 	return *metodo;
 }
+
+void chp::iterarMetodo(chp::ResolvedorEDO& metodo, std::function<void(tnw::Vetor)> f,double x) {
+	for (double i=0; fabs(x-i)>=metodo.step; i+=metodo.step) {
+		++metodo;
+		f(*metodo);
+	}
+}
