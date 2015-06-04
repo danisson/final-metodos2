@@ -1,6 +1,6 @@
 import pygame
 
-class Massa():
+class Caixa():
 	def __init__(self,largura,altura,cor,animacao,tela):
 		self.largura = largura
 		self.altura = altura
