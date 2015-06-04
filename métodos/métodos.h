@@ -102,4 +102,5 @@ namespace chp {
 
 	tnw::Vetor pontoFixo(funcaoReal,double,tnw::Vetor);
 	tnw::Vetor aplicarMetodo(ResolvedorEDO&,double x);
+	void iterarMetodo(ResolvedorEDO&,std::function<void(tnw::Vetor)>,double);
 }

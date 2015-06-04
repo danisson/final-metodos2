@@ -16,7 +16,7 @@ TEST_CASE("Vetor não-vazio recebem outros vetores","[matriz]") {
 	REQUIRE(v1 == v2);
 }
 
-TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
+TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler]") {
 	tnw::MatrizQuadrada F = {{-1,0},{0,-1}};
 
 	const double step = 1e-4,
@@ -45,7 +45,7 @@ TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 	REQUIRE(chp::aplicarMetodo(predcorr4,x)(0) == Approx(y));
 }
 
-TEST_CASE("y' = y+z; z' = z","[euler][backward]") {
+TEST_CASE("y' = y+z; z' = z","[euler]") {
 	tnw::MatrizQuadrada F = {{1,1},{0,1}};
 
 	const double step = 1e-6,
