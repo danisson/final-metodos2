@@ -10,7 +10,7 @@ CFLAGS  = -g -Wall -std=c++11 -L lib
 default: testar
 
 testar: bin/testes
-	bin/testes -s --force-colour -d yes | less -Sr
+	bin/testes -s --force-colour -d yes [euler] | less -Sr
 
 testarMatriz: bin/testes
 	bin/testes -s --force-colour -d yes [matriz] | less -Sr
