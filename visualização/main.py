@@ -2,11 +2,22 @@
 
 import sys
 import pygame
+import os
 import traceback
 from caixa import *
 from molavertical import *
 
 tamanhoTela = (640,480)
+
+_image_library = {}
+def get_image(path):
+        global _image_library
+        image = _image_library.get(path)
+        if image == None:
+                canonicalized_path = path.replace('/', os.sep).replace('\\', os.sep)
+                image = pygame.image.load(canonicalized_path)
+                _image_library[path] = image
+        return image
 
 def lerArquivoAnimacao(nomeArquivo):
 	try:
@@ -42,9 +53,19 @@ def renderizar(passo, animacao):
 	pygame.display.set_caption("Visualização de Resolução de EDO")
 
 	passoAtual = 0
+	
+	"""newMoon = get_image("new_moon.png")
+	fullMoon = get_image("full_moon.png")
+	newMoon = pygame.transform.smoothscale(newMoon,(30,30))
+	fullMoon = pygame.transform.smoothscale(fullMoon,(30,30))"""
 
-	caixa1 = Caixa(20, 10, cores["VERDE"], animacao[0], tela)
-	caixa2 = Caixa(20, 10, cores["AZUL"], animacao[1], tela)
+	caixaSprite = get_image("caixa.png")
+	caixaSprite = pygame.transform.smoothscale(caixaSprite,(30,30))
+	caixa1 = Caixa(caixaSprite, animacao[0], tela)
+	caixa2 = Caixa(caixaSprite, animacao[1], tela)
+
+
+
 	mola1 = MolaVertical(0,caixa1.retangulo.top,5,tamanhoTela[0]/2,3,tela)
 	mola2 = MolaVertical(caixa1.retangulo.bottom,caixa2.retangulo.top,5,tamanhoTela[0]/2,3,tela)
 
