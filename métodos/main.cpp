@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
 	const int numMetod = 8; //Número de métodos
 	double g = 9.81, K1 = 100, K2 = 100, M1 = 1, M2 = 1, B1 = 10, step, epsilon;
 	std::array<std::ResolvedorEDO*, numMetod> resolvedores;
-	tnw::Vetor valIniciais = {1,0,1,0,g};
+	tnw::Vetor valIniciais = {1,0,1,0,g}, resultado;
 	tnw::MatrizQuadrada sistemaEq = {
 									{0,1,0,0,0},
 									{-(K1+K2)/M1, -B1/M1, K2/M1, 0, 0},
@@ -36,39 +36,47 @@ int main(int argc, char const *argv[])
 			std::cin >> step;
 			std::cout << "Informe a precisão do ponto fixo: ";
 			std::cin >> epsilon;
-			resolvedores[0] = new chp::ForwardEuler(sistemaEq, valIniciais, step);
-			resolvedores[1] = new chp::BackwardEuler(sistemaEq, valIniciais, step, epsilon);
-			resolvedores[2] = new chp::EulerModificado(sistemaEq, valIniciais, step, epsilon); 
-			resolvedores[3] = new chp::RungeKutta(sistemaEq, valIniciais, step);
-			resolvedores[4] = new chp::RungeKutta3(sistemaEq, valIniciais, step);
-			resolvedores[5] = new chp::RungeKutta4(sistemaEq, valIniciais, step);
-			resolvedores[6] = new chp::PreditorCorretor3(sistemaEq, valIniciais, step);
-			resolvedores[7] = new chp::PreditorCorretor4(sistemaEq, valIniciais, step);
+			resolvedores[FORW_EULER] = new chp::ForwardEuler(sistemaEq, valIniciais, step);
+			resolvedores[BACK_EULER] = new chp::BackwardEuler(sistemaEq, valIniciais, step, epsilon);
+			resolvedores[EULER_MOD] = new chp::EulerModificado(sistemaEq, valIniciais, step, epsilon); 
+			resolvedores[RUNGE_KUTTA] = new chp::RungeKutta(sistemaEq, valIniciais, step);
+			resolvedores[RUNGE_KUTTA_3] = new chp::RungeKutta3(sistemaEq, valIniciais, step);
+			resolvedores[RUNGE_KUTTA_4] = new chp::RungeKutta4(sistemaEq, valIniciais, step);
+			resolvedores[PRED_CORR_3] = new chp::PreditorCorretor3(sistemaEq, valIniciais, step);
+			resolvedores[PRED_CORR_4] = new chp::PreditorCorretor4(sistemaEq, valIniciais, step);
 		}
 
 		switch (metodo) {
 			case FORW_EULER: {
+				resultado = chp::aplicarMetodo(resolvedores[FORW_EULER], 20);
 				break;
 			}
 			case BACK_EULER: {
+				resultado = chp::aplicarMetodo(resolvedores[BACK_EULER], 20);
 				break;
 			}
 			case EULER_MOD: {
+				resultado = chp::aplicarMetodo(resolvedores[EULER_MOD], 20);
 				break;
 			}
 			case RUNGE_KUTTA: {
+				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA], 20);
 				break;
 			}
 			case RUNGE_KUTTA_3: {
+				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA_3], 20);
 				break;
 			}
 			case RUNGE_KUTTA_4: {
+				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA_4], 20);
 				break;
 			}
 			case PRED_CORR_3: {
+				resultado = chp::aplicarMetodo(resolvedores[PRED_CORR_3], 20);
 				break;
 			}
 			case PRED_CORR_4: {
+				resultado = chp::aplicarMetodo(resolvedores[PRED_CORR_4], 20);
 				break;
 			}
 			case SAIR: {
@@ -84,8 +92,7 @@ int main(int argc, char const *argv[])
 				for (int i=0; i<numMetod; i++){
 					//Calculando para a medição do tempo
 					auto tempoInicial = std::chrono::high_resolution_clock::now();
-					tnw::Vetor resultado;
-					resultado.aplicarMetodo(resolvedores[0], 20);
+					resultado = aplicarMetodo(resolvedores[i], 20);
 					auto tempoFinal = std::chrono::high_resolution_clock::now();
 					int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
 				}

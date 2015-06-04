@@ -61,7 +61,7 @@ tnw::Vetor::Vetor(std::initializer_list<double> l) {
 }
 
 tnw::Vetor& tnw::Vetor::operator=(const tnw::Vetor& d) {
-	if (tamanho != 0 && tamanho != d.getTamanho()) throw std::out_of_range("Vetor já incializado");
+	if (tamanho != 0 && tamanho != d.getTamanho()) throw std::out_of_range("Vetor de tamanho diferente");
 	tamanho = d.getTamanho();
 	v = d.getVetor();
 	return *this;

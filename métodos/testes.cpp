@@ -35,15 +35,14 @@ TEST_CASE("e^-x para x := 6 e step := 1e-4","[euler][backward]") {
 	auto predcorr3 = chp::PreditorCorretor3(F,y0,step);
 	auto predcorr4 = chp::PreditorCorretor4(F,y0,step);
 
-
-	REQUIRE(forward(x)(0) == Approx(y));
-	REQUIRE(backward(x)(0) == Approx(y));
-	REQUIRE(modificado(x)(0) == Approx(y));
-	REQUIRE(rk(x)(0) == Approx(y));
-	REQUIRE(rk3(x)(0) == Approx(y));
-	REQUIRE(rk4(x)(0) == Approx(y));
-	REQUIRE(predcorr3(x)(0) == Approx(y));
-	REQUIRE(predcorr4(x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(forward,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(backward,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(modificado,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(rk,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(rk3,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(rk4,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(predcorr3,x)(0) == Approx(y));
+	REQUIRE(chp::aplicarMetodo(predcorr4,x)(0) == Approx(y));
 }
 
 TEST_CASE("y' = y+z; z' = z","[euler][backward]") {
@@ -62,7 +61,7 @@ TEST_CASE("y' = y+z; z' = z","[euler][backward]") {
 	auto modificado = chp::EulerModificado(F,y0,step,epsilon);
 	auto rk4 = chp::RungeKutta4(F,y0,step);
 
-	auto rforward = forward(x);
+	auto rforward = chp::aplicarMetodo(forward,x);
 	// auto rbackward = backward(x);
 	// auto rmodificado = modificado(x);
 	// auto rrk4 = rk4(x);
