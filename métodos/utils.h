@@ -17,7 +17,7 @@ namespace chp{
 		}
 		void printVetor(tnw::Vetor v) {
 			// printf("%s\n", v.toString().c_str());
-			arquivo << v(0) << "," << v(3) << std::endl;
+			arquivo << v(0) << "," << v(2) << std::endl;
 			//arquivo << v(1) << "," << v(3) << "\n";
 		}
 	};

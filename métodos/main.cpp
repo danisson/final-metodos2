@@ -15,7 +15,7 @@ int main(int argc, char const *argv[])
 	bool feito = false;
 	int metodo;
 	const int numMetod = 8; //Número de métodos
-	double g = 9.81, K1 = 100, K2 = 100, M1 = 1, M2 = 1, B1 = 10, step, epsilon;
+	double g = 9.81, step, epsilon;
 	std::array<chp::ResolvedorEDO*, numMetod> resolvedores;
 	tnw::Vetor valIniciais = {1,0,1,0,g}, resultado;
 	tnw::MatrizQuadrada sistemaEq = {{0,1,0,0,0},
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 	                                 {100, 0, -100, 0, 1},
 	                                 {0,0,0,0,0}
 	                                };
-	                                
+
 	while (!feito){
 		std::cout << "Bem-vindos à simulação de equações diferenciais! Selecione o método que você quer executar:\n";
 		for (int i = FORW_EULER; i <= ANALISE_GERAL; i++){
