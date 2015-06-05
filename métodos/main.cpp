@@ -117,36 +117,49 @@ int main(int argc, char const *argv[])
 				break;
 			}
 			case ANALISE_GERAL: {
-				std::cout << "Informe o nome do arquivo de resultados: ";
-				std::string arqNome;
-				std::cin >> arqNome;
+				std::cout << "Informe o nome do arquivo de tempos: ";
+				std::string nomeTempos;
+				std::cin >> nomeTempos;
 
-				std::ifstream teste(arqNome);
-				std::ofstream saida;
-				if (teste){
+				std::fstream arqTempos(nomeTempos);
+				if (arqTempos){
 					//Arquivo já existe
-					teste.close();
-					saida.open(arqNome,std::ios::out | std::ios::app);	
+					arqTempos.close();
+					arqTempos.open(nomeTempos,std::ios::out | std::ios::app);
 				} else {
 					//Arqivo não existe
-					saida.open(arqNome,std::ios::out);
-					saida << "Nome Método, Tempo (ms), Step, Epsilon\n";
+					arqTempos.open(nomeTempos,std::ios::out);
+					arqTempos << "Nome Método, Tempo (ms), Step, Epsilon\n";
 				}
-				
-				
 
-				if (saida.is_open()){
-					
-					
-					for (int i=0; i<numMetod; i++){
+				if (arqTempos.is_open()) {
+					for (int i=0; i < numMetod; i++){
 						//Calculando para a medição do tempo
 						auto tempoInicial = std::chrono::high_resolution_clock::now();
 						resultado = aplicarMetodo(*resolvedores[i], 20);
 						auto tempoFinal = std::chrono::high_resolution_clock::now();
 						int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
-						
-						saida << opcaoName[i] << "," << dif << "," << step << "," << epsilon << "\n";
-					}	
+						arqTempos << opcaoName[i] << "," << dif << "," << step << "," << epsilon << "\n";
+					}
+				}
+
+				for (int i=0; i < numMetod; i++){
+					resolvedores[i]->setInicio(valIniciais);
+				}
+
+				std::cout << "Informe o nome do arquivo para plot: ";
+				std::string nomePontos;
+				std::cin >> nomePontos;
+				std::fstream arqPontos(nomePontos, std::ios::out);
+				if (arqPontos.is_open()) {
+					arqPontos << "Nome do Método,Pontos...\n";
+					arqPontos.precision(numeric_limits<double>::digits10 + 1);
+					auto f = [&](tnw::Vetor v) {arqPontos << "," << v(0);};
+					for (int i=0; i < numMetod; i++){
+						arqPontos << opcaoName[i];
+						iterarMetodo(*resolvedores[i],f,20);
+						arqPontos << std::endl;
+					}
 				}
 
 				break;
