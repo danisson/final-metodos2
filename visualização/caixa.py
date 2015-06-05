@@ -15,8 +15,8 @@ class Caixa():
 		self.retangulo = pygame.Rect(animacao[self.posicaoAtual][0]-self.largura/2+self.offsetX,animacao[self.posicaoAtual][1]+self.altura/2,self.largura,self.altura)		
 		
 		
-	def desenharProxPosicao(self):
+	def desenharProxPosicao(self,i=1):
 		self.tela.blit(self.caixaSprite,self.retangulo)
-		self.posicaoAtual = (self.posicaoAtual + 1)%len(self.animacao)		
+		self.posicaoAtual = (self.posicaoAtual + i)%len(self.animacao)
 		self.retangulo.x, self.retangulo.y = (self.animacao[self.posicaoAtual][0]+self.offsetX-self.largura/2,self.animacao[self.posicaoAtual][1]+self.altura/2)
 		#print str(self.retangulo.x) + " " + str(self.retangulo.y)

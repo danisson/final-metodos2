@@ -8,6 +8,8 @@ from caixa import *
 from molavertical import *
 
 tamanhoTela = (256,700)
+fps = None
+time = 5
 
 _image_library = {}
 def get_image(path):
@@ -67,39 +69,45 @@ def renderizar(passo, animacao):
 	mola1 = MolaVertical(cores["PRETO"],0,caixa1.retangulo.top,15,tamanhoTela[0]/2,10,tela)
 	mola2 = MolaVertical(cores["PRETO"],caixa1.retangulo.bottom,caixa2.retangulo.top,15,tamanhoTela[0]/2,5,tela)
 
-	print passo*10
 	aberto = True
 	relogio = pygame.time.Clock()
+
+	skip = 1
+	if (fps > 60):
+		print fps - 60
+		print (fps - 60)/60
+		print int((fps - 60)/60)+1
+		skip = int((fps - 60)/60)+1
+
 	while aberto:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				aberto = False
 				break
-			if event.type == pygame.KEYDOWN:
-				tela.blit(get_image("background.png"),(0,0))
-				mola1.desenharMola()
-				mola2.desenharMola()
-				caixa1.desenharProxPosicao()
-				caixa2.desenharProxPosicao()
-				mola1.yfinal = caixa1.retangulo.top
-				mola2.yinicial = caixa1.retangulo.bottom
-				mola2.yfinal = caixa2.retangulo.top
+			# if event.type == pygame.KEYDOWN:
+			# 	tela.blit(get_image("background.png"),(0,0))
+			# 	mola1.desenharMola()
+			# 	mola2.desenharMola()
+			# 	caixa1.desenharProxPosicao()
+			# 	caixa2.desenharProxPosicao()
+			# 	mola1.yinicial = min(caixa1.retangulo.top,0);
+			# 	mola1.yfinal = max(caixa1.retangulo.top,0);
+			# 	mola2.yinicial = min(caixa1.retangulo.bottom,caixa2.retangulo.top)
+			# 	mola2.yfinal = max(caixa1.retangulo.bottom,caixa2.retangulo.top)
+			# 	pygame.display.flip()
 
-				pygame.display.flip()
+		tela.blit(get_image("background.png"),(0,0))
+		mola1.desenharMola()
+		mola2.desenharMola()
+		caixa1.desenharProxPosicao(skip)
+		caixa2.desenharProxPosicao(skip)
+		mola1.yinicial = min(caixa1.retangulo.top,0);
+		mola1.yfinal = max(caixa1.retangulo.top,0);
+		mola2.yinicial = min(caixa1.retangulo.bottom,caixa2.retangulo.top)
+		mola2.yfinal = max(caixa1.retangulo.bottom,caixa2.retangulo.top)
+		pygame.display.flip()
 
-		# tela.blit(get_image("background.png"),(0,0))
-		# #tela.fill(cores["BRANCO"])
-		# #criarLinhas(caixa1,caixa2,tela)
-		# mola1.desenharMola()
-		# mola2.desenharMola()
-		# caixa1.desenharProxPosicao()
-		# caixa2.desenharProxPosicao()
-		# mola1.yfinal = caixa1.retangulo.top
-		# mola2.yinicial = caixa1.retangulo.bottom
-		# mola2.yfinal = caixa2.retangulo.top
-
-		# pygame.display.flip()
-		relogio.tick((1+(20/passo))/10)
+		relogio.tick(min(60,fps))
 
 def main():
 	nomeArquivo = sys.argv[1]
@@ -111,6 +119,8 @@ def main():
 		print "Informe um nome de arquivo válido."
 		sys.exit(1)
 
+	global fps
+	fps = (1+(20/passo))/time
 	renderizar(passo, animacao)
 
 if __name__ == '__main__':	
