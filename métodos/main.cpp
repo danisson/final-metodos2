@@ -120,13 +120,33 @@ int main(int argc, char const *argv[])
 				std::cout << "Informe o nome do arquivo de resultados: ";
 				std::string arqNome;
 				std::cin >> arqNome;
+
+				std::ifstream teste(arqNome);
+				std::ofstream saida;
+				if (teste){
+					//Arquivo já existe
+					teste.close();
+					saida.open(arqNome,std::ios::out | std::ios::app);	
+				} else {
+					//Arqivo não existe
+					saida.open(arqNome,std::ios::out);
+					saida << "Nome Método, Tempo (ms), Step, Epsilon\n";
+				}
 				
-				for (int i=0; i<numMetod; i++){
-					//Calculando para a medição do tempo
-					auto tempoInicial = std::chrono::high_resolution_clock::now();
-					resultado = aplicarMetodo(*resolvedores[i], 20);
-					auto tempoFinal = std::chrono::high_resolution_clock::now();
-					int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
+				
+
+				if (saida.is_open()){
+					
+					
+					for (int i=0; i<numMetod; i++){
+						//Calculando para a medição do tempo
+						auto tempoInicial = std::chrono::high_resolution_clock::now();
+						resultado = aplicarMetodo(*resolvedores[i], 20);
+						auto tempoFinal = std::chrono::high_resolution_clock::now();
+						int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
+						
+						saida << opcaoName[i] << "," << dif << "," << step << "," << epsilon << "\n";
+					}	
 				}
 
 				break;

@@ -118,6 +118,5 @@ void chp::iterarMetodo(chp::ResolvedorEDO& metodo, std::function<void(tnw::Vetor
 	for (double i=0; fabs(x-i)>=metodo.step; i+=metodo.step) {
 		f(*metodo);
 		++metodo;
-		//f(*metodo);
 	}
 }
