@@ -9,7 +9,7 @@ CFLAGS  = -g -Wall -std=c++11 -L lib
 
 default: main
 
-bin/main: main.cpp bin/métodos.o lib/libmatriz.a 
+bin/main: main.cpp bin/métodos.o lib/libmatriz.a utils.h
 	$(CC) $(CFLAGS) main.cpp bin/métodos.o -o bin/main -lmatriz
 
 main: bin/main

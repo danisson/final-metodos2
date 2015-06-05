@@ -1,5 +1,6 @@
 #include "métodos.h"
 #include "matrizes/matrizes.h"
+#include "utils.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -15,15 +16,18 @@ int main(int argc, char const *argv[])
 	int metodo;
 	const int numMetod = 8; //Número de métodos
 	double g = 9.81, K1 = 100, K2 = 100, M1 = 1, M2 = 1, B1 = 10, step, epsilon;
-	std::array<std::ResolvedorEDO*, numMetod> resolvedores;
+	std::array<chp::ResolvedorEDO*, numMetod> resolvedores;
 	tnw::Vetor valIniciais = {1,0,1,0,g}, resultado;
 	tnw::MatrizQuadrada sistemaEq = {
 									{0,1,0,0,0},
-									{-(K1+K2)/M1, -B1/M1, K2/M1, 0, 0},
+									{-(K1+K2)/M1, -B1/M1, K2/M1, 0, 1},
 									{0,0,0,1,0},
-									{K2/M2, 0, K2/M2, 0, 1},
+									{-K2/M2, 0, K2/M2, 0, 1},
 									{0,0,0,0,0}
 									};
+	/*tnw::Vetor valIniciais = {1,g};
+	tnw::MatrizQuadrada sistemaEq = {/*y1'  ={0,1},
+	                                 /*g'   ={0,0}};*/
 
 	while (!feito){
 		std::cout << "Bem-vindos à simulação de equações diferenciais! Selecione o método que você quer executar:\n";
@@ -48,35 +52,67 @@ int main(int argc, char const *argv[])
 
 		switch (metodo) {
 			case FORW_EULER: {
-				resultado = chp::aplicarMetodo(resolvedores[FORW_EULER], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[FORW_EULER], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case BACK_EULER: {
-				resultado = chp::aplicarMetodo(resolvedores[BACK_EULER], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[BACK_EULER], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case EULER_MOD: {
-				resultado = chp::aplicarMetodo(resolvedores[EULER_MOD], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[EULER_MOD], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case RUNGE_KUTTA: {
-				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[RUNGE_KUTTA], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case RUNGE_KUTTA_3: {
-				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA_3], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[RUNGE_KUTTA_3], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case RUNGE_KUTTA_4: {
-				resultado = chp::aplicarMetodo(resolvedores[RUNGE_KUTTA_4], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[RUNGE_KUTTA_4], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case PRED_CORR_3: {
-				resultado = chp::aplicarMetodo(resolvedores[PRED_CORR_3], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[PRED_CORR_3], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case PRED_CORR_4: {
-				resultado = chp::aplicarMetodo(resolvedores[PRED_CORR_4], 20);
+				std::string arqNome;
+				std::cout << "Digite o nome do arquivo de saída dos valores: ";
+				std::cin >> arqNome;
+				chp::Printer printer(arqNome,step);
+				chp::iterarMetodo(*resolvedores[PRED_CORR_4], [&](tnw::Vetor x) {printer.printVetor(x);}, 20);
 				break;
 			}
 			case SAIR: {
@@ -92,7 +128,7 @@ int main(int argc, char const *argv[])
 				for (int i=0; i<numMetod; i++){
 					//Calculando para a medição do tempo
 					auto tempoInicial = std::chrono::high_resolution_clock::now();
-					resultado = aplicarMetodo(resolvedores[i], 20);
+					resultado = aplicarMetodo(*resolvedores[i], 20);
 					auto tempoFinal = std::chrono::high_resolution_clock::now();
 					int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
 				}
