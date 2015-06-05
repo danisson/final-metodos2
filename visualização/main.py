@@ -7,7 +7,7 @@ import traceback
 from caixa import *
 from molavertical import *
 
-tamanhoTela = (100,480)
+tamanhoTela = (256,700)
 
 _image_library = {}
 def get_image(path):
@@ -29,7 +29,7 @@ def lerArquivoAnimacao(nomeArquivo):
 		
 		for linha in linhasArquivo:
 			[y0,y1] = map(float,linha.split(','))
-			animacao.append(((0.0,y0),(0.0,y1)))
+			animacao.append(((0.0,1000*y0),(0.0,1000*y1)))
 
 		animacao = map(list,zip(*animacao))
 		return passo, animacao
@@ -53,21 +53,24 @@ def renderizar(passo, animacao):
 	pygame.display.set_caption("Visualização de Resolução de EDO")
 
 	passoAtual = 0
-	
-	"""newMoon = get_image("new_moon.png")
+	"""
+	newMoon = get_image("new_moon.png")
 	fullMoon = get_image("full_moon.png")
-	newMoon = pygame.transform.smoothscale(newMoon,(30,30))
-	fullMoon = pygame.transform.smoothscale(fullMoon,(30,30))"""
-
-	caixaSprite = get_image("caixa.png")
-	caixaSprite = pygame.transform.smoothscale(caixaSprite,(20,20))
+	newMoon = pygame.transform.smoothscale(newMoon,(35,35))
+	fullMoon = pygame.transform.smoothscale(fullMoon,(35,35))
+	caixa1 = Caixa(newMoon, animacao[0], tela)
+	caixa2 = Caixa(fullMoon, animacao[1], tela)
+	"""
+	
+	caixaSprite = get_image("caixa2.png")
+	caixaSprite = pygame.transform.smoothscale(caixaSprite,(50,50))
 	caixa1 = Caixa(caixaSprite, animacao[0], tela)
 	caixa2 = Caixa(caixaSprite, animacao[1], tela)
 
 
 
-	mola1 = MolaVertical(0,caixa1.retangulo.top,10,tamanhoTela[0]/2,6,tela)
-	mola2 = MolaVertical(caixa1.retangulo.bottom,caixa2.retangulo.top,10,tamanhoTela[0]/2,5,tela)
+	mola1 = MolaVertical(0,caixa1.retangulo.top,15,tamanhoTela[0]/2,6,tela)
+	mola2 = MolaVertical(caixa1.retangulo.bottom,caixa2.retangulo.top,15,tamanhoTela[0]/2,5,tela)
 
 	print passo*10
 	aberto = True
@@ -78,7 +81,8 @@ def renderizar(passo, animacao):
 				aberto = False
 				break
 
-		tela.fill(cores["BRANCO"])
+		tela.blit(get_image("background.png"),(0,0))
+		#tela.fill(cores["BRANCO"])
 		#criarLinhas(caixa1,caixa2,tela)
 		mola1.desenharMola()
 		mola2.desenharMola()

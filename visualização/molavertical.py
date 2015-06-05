@@ -28,4 +28,4 @@ class MolaVertical():
 			pontos.append((atualX,atualY))
 
 		pontos.append((self.alinhamentoX,self.yfinal))
-		pygame.draw.aalines(self.tela,(0,0,0),False,pontos,1)
+		pygame.draw.aalines(self.tela,(255,255,255),False,pontos,1)
