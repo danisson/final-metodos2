@@ -16,7 +16,7 @@ class Caixa():
 		
 		
 	def desenharProxPosicao(self):
-		self.tela.blit(self.caixaSprite,self.retangulo)		
+		self.tela.blit(self.caixaSprite,self.retangulo)
 		self.posicaoAtual = (self.posicaoAtual + 1)%len(self.animacao)		
 		self.retangulo.x, self.retangulo.y = (self.animacao[self.posicaoAtual][0]+self.offsetX-self.largura/2,self.animacao[self.posicaoAtual][1]+self.altura/2)
-		print str(self.retangulo.x) + " " + str(self.retangulo.y)
+		#print str(self.retangulo.x) + " " + str(self.retangulo.y)

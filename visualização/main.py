@@ -7,7 +7,7 @@ import traceback
 from caixa import *
 from molavertical import *
 
-tamanhoTela = (640,480)
+tamanhoTela = (100,480)
 
 _image_library = {}
 def get_image(path):
@@ -60,14 +60,14 @@ def renderizar(passo, animacao):
 	fullMoon = pygame.transform.smoothscale(fullMoon,(30,30))"""
 
 	caixaSprite = get_image("caixa.png")
-	caixaSprite = pygame.transform.smoothscale(caixaSprite,(30,30))
+	caixaSprite = pygame.transform.smoothscale(caixaSprite,(20,20))
 	caixa1 = Caixa(caixaSprite, animacao[0], tela)
 	caixa2 = Caixa(caixaSprite, animacao[1], tela)
 
 
 
-	mola1 = MolaVertical(0,caixa1.retangulo.top,5,tamanhoTela[0]/2,3,tela)
-	mola2 = MolaVertical(caixa1.retangulo.bottom,caixa2.retangulo.top,5,tamanhoTela[0]/2,3,tela)
+	mola1 = MolaVertical(0,caixa1.retangulo.top,10,tamanhoTela[0]/2,6,tela)
+	mola2 = MolaVertical(caixa1.retangulo.bottom,caixa2.retangulo.top,10,tamanhoTela[0]/2,5,tela)
 
 	print passo*10
 	aberto = True
