@@ -15,6 +15,7 @@ namespace chp {
 		virtual ~ResolvedorEDO() {};
 		virtual tnw::Vetor operator*() {return y0;}
 		virtual ResolvedorEDO& operator++() = 0;
+		virtual void setInicio(tnw::Vetor v) {y0 = v;}
 	};
 
 	class ForwardEuler : public ResolvedorEDO {
