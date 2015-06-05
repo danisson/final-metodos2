@@ -17,13 +17,12 @@ int main(int argc, char const *argv[])
 	double g = 9.81, K1 = 100, K2 = 100, M1 = 1, M2 = 1, B1 = 10, step, epsilon;
 	std::array<std::ResolvedorEDO*, numMetod> resolvedores;
 	tnw::Vetor valIniciais = {1,0,1,0,g}, resultado;
-	tnw::MatrizQuadrada sistemaEq = {
-									{0,1,0,0,0},
-									{-(K1+K2)/M1, -B1/M1, K2/M1, 0, 0},
-									{0,0,0,1,0},
-									{K2/M2, 0, K2/M2, 0, 1},
-									{0,0,0,0,0}
-									};
+	tnw::MatrizQuadrada sistemaEq = {{0,1,0,0,0},
+	                                 {-200, -10, 100, 0, 1},
+	                                 {0,0,0,1,0},
+	                                 {100, 0, -100, 0, 1},
+	                                 {0,0,0,0,0}
+	                                };
 
 	while (!feito){
 		std::cout << "Bem-vindos à simulação de equações diferenciais! Selecione o método que você quer executar:\n";
