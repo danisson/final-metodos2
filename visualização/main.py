@@ -73,6 +73,15 @@ def renderizar(passo, animacao):
 		caixa2 = Caixa(fullMoon, animacao[1], tela)
 		return (caixa1,caixa2,background)
 
+	def setAdvanceWars():
+		pygame.mixer.music.load('assets/advance wars/bgm.mp3')
+		pygame.mixer.music.play(-1)
+		background = get_image("assets/advance wars/background.png")
+		caixaSprite = get_image("assets/advance wars/soldado.png")
+		caixa1 = Caixa(caixaSprite, animacao[0], tela)
+		caixa2 = Caixa(caixaSprite, animacao[1], tela)
+		return (caixa1,caixa2,background)
+
 	cores = {"VERMELHO": (255,0,0), "AZUL": (0,0,255), "VERDE": (0,255,0), "PRETO": (0,0,0), "BRANCO": (255,255,255)}
 	#tamanhoTela = (640,480)
 	
@@ -108,6 +117,8 @@ def renderizar(passo, animacao):
 					(caixa1,caixa2,background) = setMario()
 				if event.key == pygame.K_2:
 					(caixa1,caixa2,background) = setLua()
+				if event.key == pygame.K_3:
+					(caixa1,caixa2,background) = setAdvanceWars()
 			# 	tela.blit(get_image("background.png"),(0,0))
 			# 	mola1.desenharMola()
 			# 	mola2.desenharMola()
