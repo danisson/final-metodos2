@@ -36,7 +36,10 @@ leves modificações neste projeto.
 
 Para organizar o trabalho em equipe, usamos a plataforma [Github][m2] e a
 ferramenta de controle de versão [Git][git]. Isso facilitou muito o trabalho
-concorrente de membros da equipe.
+concorrente de membros da equipe. Outra ferramenta que ajudou muito a
+implementação foi a biblioteca [Catch][cth] que fornece uma interface simples
+para a implementação de testes unitários, usando ela certos bugs foram
+detectados mais cedo e de forma automatizada.
 
 Sobre a estrutura das classes do trabalho, estamos representando cada método
 como uma classe que herda de uma classe abstrata que indica o que um método
@@ -57,9 +60,10 @@ biblioteca [PyGame][pg].
 [m1]: https://github.com/danisson/final-metodos1 "Github do projeto anterior"
 [m2]: https://github.com/danisson/final-metodos2 "Github do projeto atual"
 [git]: http://en.wikipedia.org/wiki/Git_%28software%29 "Página do Wikipédia sobre git"
+[cth]: https://github.com/philsquared/Catch "Github da biblioteca Catch"
 [pg]: http://en.wikipedia.org/wiki/Pygame "Página do Wikipédia sobre Pygame"
 
-###Divisão do trabalho
+##Divisão do trabalho
 | Membro da Equipe 			| Parte do trabalho 										                   	|
 |:--------------------------|:------------------------------------------------------------------------------|
 | Carolina Herbster  		| Implementação do método Euler backward										|
@@ -76,4 +80,4 @@ biblioteca [PyGame][pg].
 | Mariana Fontenele Lopes	| Implementação do método Euler modificado										|
 |							| Escrita do Relatório 															|
 
-###Resultados e Análise
+##Resultados e Análise
