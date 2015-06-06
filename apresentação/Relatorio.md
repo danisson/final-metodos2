@@ -29,8 +29,8 @@ segunda ordem em quatro de primeira ordem.
 ## Implementação
 
 A implementação dos métodos numéricos foi feita em C++11, contudo, para resolver
-sistemas lineares de EDOs precisariamos de algumas classes envolvendo vetores e
-matrizes. Felizmente, na disciplina de [Métodos Numéricos I][m1] já tinhamos
+sistemas lineares de EDOs precisaríamos de algumas classes envolvendo vetores e
+matrizes. Felizmente, na disciplina de [Métodos Numéricos I][m1] já tínhamos
 classes que representam essas estruturas e estas classes foram importadas com
 leves modificações neste projeto.
 
@@ -53,14 +53,32 @@ para o usuário comum usar. A interface de mais alto nível é uma função que
 recebe um método e um valor para qual queremos avaliar a solução do sistema,
 retornando o valor da solução naquele ponto.
 
-Como foi altamente recomendado a existencia uma simulação que demonstrasse o
-movimento do sistema, uma simulação foi implementada em Python2 utilizando a
-biblioteca [PyGame][pg].
-
 [m1]: https://github.com/danisson/final-metodos1 "Github do projeto anterior"
 [m2]: https://github.com/danisson/final-metodos2 "Github do projeto atual"
 [git]: http://en.wikipedia.org/wiki/Git_%28software%29 "Página do Wikipédia sobre git"
 [cth]: https://github.com/philsquared/Catch "Github da biblioteca Catch"
+
+## Visualização
+
+<p align="center"><img src="./visualização.png"/></p>
+
+Como foi altamente recomendado a existência uma simulação que demonstrasse o
+movimento do sistema, uma simulação foi implementada em Python2 utilizando a
+biblioteca [PyGame][pg].
+
+Já que estamos simulando um sistema físico resolvemos adicionar como parâmetro
+da animação o tempo que ela deveria rodar, isso acabou incluindo um problema
+porque dependendo do *step* do método teríamos muitos frames para poucos
+segundos. Por exemplo, usando um step de 0.01 temos cerca de 2000 frames, isso
+é uma animação de 33.3 segundos supondo 60fps.
+
+Por causa disso, estamos usando um método simples de *frame skipping*, ou seja,
+estamos pulando uma certa quantidade de frames para não ultrapassar a marca de
+60 frames por segundo. A vantagem de usar isso é que estamos potencialmente
+evitando problemas de *screen tearing* na maior parte dos monitores e mostrando
+a animação muito próximo do tempo que foi especificado. (A custa de não exibir
+certos frames)
+
 [pg]: http://en.wikipedia.org/wiki/Pygame "Página do Wikipédia sobre Pygame"
 
 ##Divisão do trabalho
