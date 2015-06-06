@@ -9,7 +9,7 @@
 
 ## Introdução
 O trabalho tem como objetivo aplicar conhecimentos adquiridos na cadeira de
-Métodos Numéricos II em que cada equipe recebe um problema de valor inicial e
+Métodos Numéricos II. Assim, cada equipe recebe um problema de valor inicial e
 deve resolvê-lo implementando os métodos seguintes em C++:
 
 * Euler: forward, modificado e backward;
