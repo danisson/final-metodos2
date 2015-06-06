@@ -10,23 +10,36 @@
 
 int main(int argc, char const *argv[])
 {
-	enum Opcao {FORW_EULER, BACK_EULER, EULER_MOD, RUNGE_KUTTA, RUNGE_KUTTA_3, RUNGE_KUTTA_4, PRED_CORR_3, PRED_CORR_4, SAIR, ANALISE_GERAL};
-	std::string opcaoName[] = {"Forward Euler", "Backward Euler", "Euler Modificado", "Runge Kutta Segunda Ordem", "Runge Kutta Terceira Ordem", "Runge Kutta Quarta Ordem", "Preditor Corretor Terceira Ordem", "Preditor Corretor Quarta Ordem", "Sair", "Análise de todos os métodos"};
+	enum Opcao {FORW_EULER, BACK_EULER, EULER_MOD, RUNGE_KUTTA,
+	            RUNGE_KUTTA_3, RUNGE_KUTTA_4, PRED_CORR_3,
+	            PRED_CORR_4, SAIR, ANALISE_GERAL};
+
+	std::string opcaoName[] = {"Forward Euler", "Backward Euler", "Euler Modificado",
+	                           "Runge Kutta Segunda Ordem", "Runge Kutta Terceira Ordem",
+	                           "Runge Kutta Quarta Ordem", "Preditor Corretor Terceira Ordem",
+	                           "Preditor Corretor Quarta Ordem", "Sair", "Análise de todos os métodos"};
 	bool feito = false;
 	int metodo;
 	const int numMetod = 8; //Número de métodos
-	double g = 9.81, step, epsilon;
+	double step, epsilon;
 	std::array<chp::ResolvedorEDO*, numMetod> resolvedores;
-	tnw::Vetor valIniciais = {1,0,1,0,g}, resultado;
-	tnw::MatrizQuadrada sistemaEq = {{0,1,0,0,0},
-	                                 {-200, -10, 100, 0, 1},
-	                                 {0,0,0,1,0},
-	                                 {100, 0, -100, 0, 1},
-	                                 {0,0,0,0,0}
-	                                };
+
+	tnw::Vetor valIniciais = {/* y1  = */ 1,
+	                          /* y1' = */ 0,
+	                          /* y2  = */ 1,
+	                          /* y2' = */ 0,
+	                          /* g   = */ 9.81};
+
+	                                 /*          y1, y1',   y2, y2', g */
+	tnw::MatrizQuadrada sistemaEq = {/* y1' */{   0,   1,    0,   0, 0},
+	                                 /* y1''*/{-200, -10,  100,   0, 1},
+	                                 /* y2' */{   0,   0,    0,   1, 0},
+	                                 /* y2''*/{ 100,   0, -100,   0, 1},
+	                                 /* g'  */{   0,   0,    0,   0, 0}};
+	tnw::Vetor resultado;
 
 	while (!feito){
-		std::cout << "Bem-vindos à simulação de equações diferenciais! Selecione o método que você quer executar:\n";
+		std::cout << "Bem-vindos à simulação de equações diferenciais!" << std::endl << "Selecione o método que você quer executar:" << std::endl;
 		for (int i = FORW_EULER; i <= ANALISE_GERAL; i++){
 			std::cout << "(" << i << ")" << opcaoName[i] << "\n"; 
 		} 	
