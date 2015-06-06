@@ -117,9 +117,11 @@ int main(int argc, char const *argv[])
 				break;
 			}
 			case ANALISE_GERAL: {
-				std::cout << "Informe o nome do arquivo de tempos: ";
-				std::string nomeTempos;
-				std::cin >> nomeTempos;
+				std::cout << "Informe a pasta que ficará os arquivos da análise: ";
+				std::string nomePasta;
+				std::cin >> nomePasta;
+				std::string nomeTempos = nomePasta + "/tempos.csv";
+				std::cout << "Será criado o arquivo tempos.csv na pasta " << nomePasta << std::endl;
 
 				std::fstream arqTempos(nomeTempos);
 				if (arqTempos){
@@ -147,17 +149,15 @@ int main(int argc, char const *argv[])
 					resolvedores[i]->setInicio(valIniciais);
 				}
 
-				std::cout << "Informe o nome do arquivo para plot: ";
+				std::cout << "Informe o prefixo do arquivo para plotagem: ";
 				std::string nomePontos;
 				std::cin >> nomePontos;
-				std::fstream arqPontos(nomePontos, std::ios::out);
-				if (arqPontos.is_open()) {
-					arqPontos << "Nome do Método,Pontos...\n";
-					arqPontos.precision(numeric_limits<double>::digits10 + 1);
-					auto f = [&](tnw::Vetor v) {arqPontos << "," << v(0);};
-					for (int i=0; i < numMetod; i++){
-						arqPontos << opcaoName[i];
-						iterarMetodo(*resolvedores[i],f,20);
+				for (int i=0; i < numMetod; i++){
+					std::fstream arqPontos(nomePasta + "/" + nomePontos + std::to_string(i) + ".csv", std::ios::out);
+					if (arqPontos.is_open()) {
+						arqPontos.precision(numeric_limits<double>::digits10 + 1);
+						arqPontos << opcaoName[i] << std::endl;
+						iterarMetodo(*resolvedores[i],[&](tnw::Vetor v){arqPontos << v(0) << std::endl;},20);
 						arqPontos << std::endl;
 					}
 				}
