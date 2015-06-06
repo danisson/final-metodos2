@@ -81,21 +81,22 @@ certos frames)
 
 [pg]: http://en.wikipedia.org/wiki/Pygame "Página do Wikipédia sobre Pygame"
 
-##Divisão do trabalho
-| Membro da Equipe 			| Parte do trabalho 										                   	|
-|:--------------------------|:------------------------------------------------------------------------------|
-| Carolina Herbster  		| Implementação do método Euler backward										|
-|							| Implementação do método de Runge-Kutta de quarta ordem						|
-|							| Implementação do método Preditor-Corretor de Adams de terceira e quarta ordem	|
-|							| Implementação da visualização													|
-|							| Implementação do menu															|
-| Daniel Augusto Ramos		| Implementação do método Euler forward											|
-|							| Implementação do método de Runge-Kutta de terceira ordem						|
-|                           | Escrita do Relatório                                                          |
-|							| Correção de bugs																|
-| Heitor Oliveira			| Implementação do método Runge-Kutta de segunda ordem							|
-|							| Implementação da visualização													|
-| Mariana Fontenele Lopes	| Implementação do método Euler modificado										|
-|							| Escrita do Relatório 															|
-
 ##Resultados e Análise
+
+
+##Divisão do trabalho
+| Membro da Equipe          | Parte do trabalho                                                             |
+|:--------------------------|:------------------------------------------------------------------------------|
+| Carolina Herbster         | Implementação do método Euler backward                                        |
+|                           | Implementação do método de Runge-Kutta de quarta ordem                        |
+|                           | Implementação do método Preditor-Corretor de Adams de terceira e quarta ordem |
+|                           | Implementação da visualização                                                 |
+|                           | Implementação do menu                                                         |
+| Daniel Augusto Ramos      | Implementação do método Euler forward                                         |
+|                           | Implementação do método de Runge-Kutta de terceira ordem                      |
+|                           | Escrita do Relatório                                                          |
+|                           | Correção de bugs                                                              |
+| Heitor Oliveira           | Implementação do método Runge-Kutta de segunda ordem                          |
+|                           | Implementação da visualização                                                 |
+| Mariana Fontenele Lopes   | Implementação do método Euler modificado                                      |
+|                           | Escrita do Relatório                                                          |
