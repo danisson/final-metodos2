@@ -9,7 +9,10 @@ from molavertical import *
 
 tamanhoTela = (300,700)
 fps = None
-time = float(sys.argv[3])
+if len(sys.argv) <= 3:
+	time = 15.0
+else:
+	time = float(sys.argv[3])
 
 _image_library = {}
 def get_image(path):
@@ -34,14 +37,20 @@ def play_sound(path):
 def lerArquivoAnimacao(nomeArquivo):
 	try:
 		arquivo = open(nomeArquivo)
+
 		passo = float(arquivo.readline())
 		
 		linhasArquivo = arquivo.readlines()
-		animacao = []
 		
+		animacao = []
+		if len(sys.argv) <= 2:
+			escala = 500.0
+		else:
+			escala = float(sys.argv[2])
+
 		for linha in linhasArquivo:
 			[y0,y1] = map(float,linha.split(','))
-			animacao.append(((0.0,float(sys.argv[2])*y0),(0.0,float(sys.argv[2])*y1+16)))
+			animacao.append(((0.0,escala*y0),(0.0,escala*y1+64)))
 
 		animacao = map(list,zip(*animacao))
 		return passo, animacao
@@ -52,6 +61,7 @@ def lerArquivoAnimacao(nomeArquivo):
 	
 def renderizar(passo, animacao):
 	def setMario():
+		pygame.display.set_icon(get_image("assets/mario/caixa.png"))
 		pygame.mixer.music.load('assets/mario/bgm.mp3')
 		pygame.mixer.music.play(-1)
 		background = get_image("assets/mario/background.png")
@@ -59,9 +69,10 @@ def renderizar(passo, animacao):
 		caixaSprite = pygame.transform.scale(caixaSprite,(64,64))
 		caixa1 = Caixa(caixaSprite, animacao[0], tela)
 		caixa2 = Caixa(caixaSprite, animacao[1], tela)
-		return (caixa1,caixa2,background)
+		return (caixa1,caixa2,background,cores["PRETO"])
 
 	def setLua():
+		pygame.display.set_icon(get_image("assets/luazinha/sun.png"))
 		pygame.mixer.music.load('assets/luazinha/bgm.mp3')
 		pygame.mixer.music.play(-1)
 		background = get_image("assets/luazinha/background.png")
@@ -71,7 +82,7 @@ def renderizar(passo, animacao):
 		fullMoon = pygame.transform.smoothscale(fullMoon,(64,64))
 		caixa1 = Caixa(newMoon, animacao[0], tela)
 		caixa2 = Caixa(fullMoon, animacao[1], tela)
-		return (caixa1,caixa2,background)
+		return (caixa1,caixa2,background,cores["PRETO"])
 
 	cores = {"VERMELHO": (255,0,0), "AZUL": (0,0,255), "VERDE": (0,255,0), "PRETO": (0,0,0), "BRANCO": (255,255,255)}
 	#tamanhoTela = (640,480)
@@ -79,14 +90,15 @@ def renderizar(passo, animacao):
 	pygame.init()
 
 	tela = pygame.display.set_mode(tamanhoTela)
-	pygame.display.set_caption("Visualização de Resolução de EDO")
+	pygame.display.set_icon(get_image("assets/mario/caixa.png"))
+	pygame.display.set_caption("Visualização do Sistema EDO")
 
 	passoAtual = 0
 
 	
-	(caixa1,caixa2,background) = setMario()
-	mola1 = MolaVertical(cores["PRETO"],0,caixa1.retangulo.top,15,tamanhoTela[0]/2,10,tela)
-	mola2 = MolaVertical(cores["PRETO"],caixa1.retangulo.bottom,caixa2.retangulo.top,15,tamanhoTela[0]/2,5,tela)
+	(caixa1,caixa2,background,cor) = setMario()
+	mola1 = MolaVertical(cor,0,caixa1.retangulo.top,15,tamanhoTela[0]/2,10,tela)
+	mola2 = MolaVertical(cor,caixa1.retangulo.bottom,caixa2.retangulo.top,15,tamanhoTela[0]/2,5,tela)
 
 	aberto = True
 	relogio = pygame.time.Clock()
@@ -105,9 +117,13 @@ def renderizar(passo, animacao):
 				break
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_1:
-					(caixa1,caixa2,background) = setMario()
+					(caixa1,caixa2,background,cor) = setMario()
+					mola1.cor = cor
+					mola2.cor = cor
 				if event.key == pygame.K_2:
-					(caixa1,caixa2,background) = setLua()
+					(caixa1,caixa2,background,cor) = setLua()
+					mola1.cor = cor
+					mola2.cor = cor
 			# 	tela.blit(get_image("background.png"),(0,0))
 			# 	mola1.desenharMola()
 			# 	mola2.desenharMola()
@@ -134,7 +150,6 @@ def renderizar(passo, animacao):
 
 def main():
 	nomeArquivo = sys.argv[1]
-	#print(nomeArquivo)
 	try:
 		passo, animacao = lerArquivoAnimacao(nomeArquivo)
 	except Exception, e:
