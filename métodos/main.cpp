@@ -141,7 +141,7 @@ int main(int argc, char const *argv[])
 				} else {
 					//Arqivo não existe
 					arqTempos.open(nomeTempos,std::ios::out);
-					arqTempos << "Nome Método, Tempo (ms), Step, Epsilon\n";
+					arqTempos << "Nome Método, Tempo (ms), Step, Epsilon" << std::endl;
 				}
 
 				if (arqTempos.is_open()) {
@@ -151,7 +151,7 @@ int main(int argc, char const *argv[])
 						resultado = aplicarMetodo(*resolvedores[i], 20);
 						auto tempoFinal = std::chrono::high_resolution_clock::now();
 						int dif = std::chrono::duration_cast<std::chrono::milliseconds>(tempoFinal-tempoInicial).count();
-						arqTempos << opcaoName[i] << "," << dif << "," << step << "," << epsilon << "\n";
+						arqTempos << opcaoName[i] << "," << dif << "," << step << "," << epsilon << std::endl;
 					}
 				}
 
@@ -167,8 +167,12 @@ int main(int argc, char const *argv[])
 					if (arqPontos.is_open()) {
 						arqPontos.precision(numeric_limits<double>::digits10 + 1);
 						arqPontos << opcaoName[i] << std::endl;
-						iterarMetodo(*resolvedores[i],[&](tnw::Vetor v){arqPontos << v(0) << std::endl;},20);
-						arqPontos << std::endl;
+						arqPontos << "y₁,y₁',y₂,y₂'" << std::endl;
+						iterarMetodo(
+							*resolvedores[i],
+							[&](tnw::Vetor v){
+								arqPontos << v(0) << "," << v(1) << "," << v(2) << "," << v(3) << std::endl;
+							},20);
 					}
 				}
 
