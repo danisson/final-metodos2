@@ -81,6 +81,16 @@ namespace chp {
 		};
 		virtual tnw::Vetor operator*() {return y[0];}
 		virtual ResolvedorEDO& operator++();
+		virtual void setInicio(tnw::Vetor v) {
+			y[0] = y0;
+			yDeriv[0] = f(y[0]);
+
+			y[1] = y[0] + step*f(y[0]);
+			yDeriv[1] = f(y[1]);
+
+			y[2] = y[1] + step*f(y[1]);
+			yDeriv[2] = f(y[2]);
+		};
 	};
 
 	class PreditorCorretor4 : public ResolvedorEDO {
@@ -99,6 +109,15 @@ namespace chp {
 		};
 		virtual tnw::Vetor operator*() {return y[0];}
 		virtual ResolvedorEDO& operator++();
+		virtual void setInicio(tnw::Vetor v) {
+			y[0] = y0;
+			yDeriv[0] = f(y[0]);
+
+			for (int j = 1; j < 4; j++){
+				y[j] = y[j-1] + step*f(y[j-1]);
+				yDeriv[j] = f(y[j]);
+			}
+		};
 	};
 
 	tnw::Vetor pontoFixo(funcaoReal,double,tnw::Vetor);
