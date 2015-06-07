@@ -7,7 +7,7 @@ CC = g++
 #  -std=c+11 usa o standard mais recente
 CFLAGS  = -g -Wall -std=c++11 -L lib
 
-default: main
+default: bin/main
 
 bin/main: main.cpp bin/métodos.o lib/libmatriz.a utils.h
 	$(CC) $(CFLAGS) main.cpp bin/métodos.o -o bin/main -lmatriz
