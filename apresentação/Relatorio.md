@@ -68,8 +68,8 @@ biblioteca [PyGame][pg].
 
 Já que estamos simulando um sistema físico resolvemos adicionar como parâmetro
 da animação o tempo que ela deveria rodar, isso acabou incluindo um problema
-porque dependendo do *step* do método teríamos muitos frames para poucos
-segundos. Por exemplo, usando um step de 0.01 temos cerca de 2000 frames, isso
+porque dependendo do *passo* do método teríamos muitos frames para poucos
+segundos. Por exemplo, usando um passo de 0.01 temos cerca de 2000 frames, isso
 é uma animação de 33.3 segundos supondo 60fps.
 
 Por causa disso, estamos usando um método simples de *frame skipping*, ou seja,
@@ -94,7 +94,7 @@ Range-Kutta de quarta ordem e o menor pelo método de Euler.
 
 <p align="center"><img src="./2e-2/Tempos.png"/></p>
 
-Aqui temos uma comparação de tempo usando step com valor de 0.02. Aqui temos que
+Aqui temos uma comparação de tempo usando passo com valor de 0.02. Aqui temos que
 os métodos mais rápidos foram Forward Euler e Range-Kutta de Segunda Ordem.
 Vamos agora comparar os valores computados pelos dois.
 
@@ -121,20 +121,24 @@ Este gráfico mostra isso comparando o Preditor-Corretor de quarta ordem com o
 Range-Kutta de quarta ordem, está sendo mostrado a diferenção entre eles.
 
 Também observamos que quando o passo é 0.1, a maioria dos métodos diverge.
-<p align="center"><img src="./1e-1/Tempos.png"/></p>
+<p align="center"><img src="./1e-1/Tempos.jpg"/></p>
 Backward Euler foi o método que mais demorou porque ele foi o método que mais 
 divergiu.
 
-<p align="center"><img src="./1e-1/Forward Euler.png"/></p>
-<p align="center"><img src="./1e-1/Backward Euler.png"/></p>
-<p align="center"><img src="./1e-1/Euler Modificado.png"/></p>
-<p align="center"><img src="./1e-1/Runge-Kutta 2.png"/></p>
-<p align="center"><img src="./1e-1/Runge-Kutta 3.png"/></p>
-<p align="center"><img src="./1e-1/Runge-Kutta 4.png"/></p>
-<p align="center"><img src="./1e-1/Preditor-Corretor 3.png"/></p>
-<p align="center"><img src="./1e-1/Preditor-Corretor 4.png"/></p>
+<p align="center"><img src="./1e-1/Forward Euler.jpg"/></p>
+<p align="center"><img src="./1e-1/Euler Modificado.jpg"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 2.jpg"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 3.jpg"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 4.jpg"/></p>
+<p align="center"><img src="./1e-1/Preditor-Corretor 3.jpg"/></p>
+<p align="center"><img src="./1e-1/Preditor-Corretor 4.jpg"/></p>
 
-Daqui, podemos ver que os métodos xxx divergiram.
+Daqui, podemos ver que a maior parte dos métodos divergiram, exceto Range-Kutta
+de terceira e de quarta ordem. Podemos explicar isso porque estes métodos
+avaliam a equação diferencial em frações do passo enquanto que os outros só
+avaliam em quantidades inteiras de passo. O gráfico do método de Euler Backward
+não pode ser mostrado porque depois do segundo passo, todos os valores ficaram
+em -infinito, isso acontece porque o ponto-fixo também divergiu.
 
 Concluindo a análise, podemos ver que o método de Range-Kutta 4 é o mais preciso
 nos valores variados de passo mas também é o mais lento.
