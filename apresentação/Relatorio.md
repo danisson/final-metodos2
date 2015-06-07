@@ -121,7 +121,7 @@ Este gráfico mostra isso comparando o Preditor-Corretor de quarta ordem com o
 Range-Kutta de quarta ordem, está sendo mostrado a diferenção entre eles.
 
 Também observamos que quando o passo é 0.1, a maioria dos métodos diverge.
-<p align="center"><img src="./1e-1/Tempos.png"/></p>
+<p align="center"><img src="./1e-1/Tempos.jpg"/></p>
 Backward Euler foi o método que mais demorou porque ele foi o método que mais 
 divergiu.
 
