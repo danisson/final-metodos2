@@ -82,6 +82,43 @@ certos frames)
 [pg]: http://en.wikipedia.org/wiki/Pygame "Página do Wikipédia sobre Pygame"
 
 ##Resultados e Análise
+Para fazer a análise, rodamos os métodos em turnos. Cada turno aumentava a
+precisão requerida em fatores de 10, assim estavamos crescendo a precisão de
+forma exponencial.
+
+<p align="center"><img src="./tempos.png"/></p>
+
+Como podemos ver no gráfico, em todos os métodos aconteceu um crescimento
+exponencial do tempo de espera. Sendo que o maior deles foi gasto pelo
+Range-Kutta de quarta ordem e o menor pelo método de Euler.
+
+<p align="center"><img src="./2e-2/Tempos.png"/></p>
+
+Aqui temos uma comparação de tempo usando step com valor de 0.02. Aqui temos que
+os métodos mais rápidos foram Forward Euler e Range-Kutta de Segunda Ordem.
+Vamos agora comparar os valores computados pelos dois.
+
+<p align="center"><img src="./2e-2/Forward Euler.png"/></p>
+<p align="center"><img src="./2e-2/Runge-Kutta 2.png"/></p>
+
+Podemos ver que que o Método de Runge-Kutta tem resultados muito mais suaves com
+uma precisão baixa e no mesmo tempo que o método de Euler.
+
+<p align="center"><img src="./2e-2/Backward Euler.png.png"/></p>
+<p align="center"><img src="./2e-2/Euler Modificado.png"/></p>
+<p align="center"><img src="./2e-2/Runge-Kutta 3.png"/></p>
+<p align="center"><img src="./2e-2/Runge-Kutta 4.png"/></p>
+<p align="center"><img src="./2e-2/Preditor-Corretor 3.png"/></p>
+<p align="center"><img src="./2e-2/Preditor-Corretor 4.png"/></p>
+
+Todos os outros métodos convergem e retornam valores na mesma ordem aparti
+desse valor de passo. Mas é interessante que nesta precisão, os métodos mais
+sofisticados tem diferenças de no máximo o passo.
+
+<p align="center"><img src="./2e-2/Preditor4 vs K4.png"/></p>
+
+Este gráfico mostra isso comparando o Preditor-Corretor de quarta ordem com o
+Range-Kutta de quarta ordem, está sendo mostrado a diferenção entre eles.
 
 
 ##Divisão do trabalho
