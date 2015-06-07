@@ -26,6 +26,8 @@ Compile o resolvedor de sistemas indo pra pasta `métodos` e execute o comando `
 Depois disso, execute o arquivo compilado em `bin/main`. Irá aparecer um menu e você escolhe o que
 quer fazer.
 
+Tenha certeza que as pastas `bin` e `lib` existem dentro da pasta `métodos`.
+
 As opções com nomes de métodos irá executar aquele método e trazer o output para um arquivo que você pode
 escolher o nome, o output são as coordenadas das duas massas.
 Dado que o método executou e você tem esse arquivo, podemos agora visualizar a solução desse sistema.
