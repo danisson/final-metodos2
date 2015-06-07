@@ -104,7 +104,7 @@ Vamos agora comparar os valores computados pelos dois.
 Podemos ver que que o Método de Runge-Kutta tem resultados muito mais suaves com
 uma precisão baixa e no mesmo tempo que o método de Euler.
 
-<p align="center"><img src="./2e-2/Backward Euler.png.png"/></p>
+<p align="center"><img src="./2e-2/Backward Euler.png"/></p>
 <p align="center"><img src="./2e-2/Euler Modificado.png"/></p>
 <p align="center"><img src="./2e-2/Runge-Kutta 3.png"/></p>
 <p align="center"><img src="./2e-2/Runge-Kutta 4.png"/></p>
@@ -120,6 +120,24 @@ sofisticados tem diferenças de no máximo o passo.
 Este gráfico mostra isso comparando o Preditor-Corretor de quarta ordem com o
 Range-Kutta de quarta ordem, está sendo mostrado a diferenção entre eles.
 
+Também observamos que quando o passo é 0.1, a maioria dos métodos diverge.
+<p align="center"><img src="./1e-1/Tempos.png"/></p>
+Backward Euler foi o método que mais demorou porque ele foi o método que mais 
+divergiu.
+
+<p align="center"><img src="./1e-1/Forward Euler.png"/></p>
+<p align="center"><img src="./1e-1/Backward Euler.png"/></p>
+<p align="center"><img src="./1e-1/Euler Modificado.png"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 2.png"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 3.png"/></p>
+<p align="center"><img src="./1e-1/Runge-Kutta 4.png"/></p>
+<p align="center"><img src="./1e-1/Preditor-Corretor 3.png"/></p>
+<p align="center"><img src="./1e-1/Preditor-Corretor 4.png"/></p>
+
+Daqui, podemos ver que os métodos xxx divergiram.
+
+Concluindo a análise, podemos ver que o método de Range-Kutta 4 é o mais preciso
+nos valores variados de passo mas também é o mais lento.
 
 ##Divisão do trabalho
 | Membro da Equipe          | Parte do trabalho                                                             |
