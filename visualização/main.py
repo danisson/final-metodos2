@@ -180,14 +180,18 @@ def renderizar(passo, animacao):
 		relogio.tick(min(60,fps))
 
 def main():
-	nomeArquivo = sys.argv[1]
 	try:
-		passo, animacao = lerArquivoAnimacao(nomeArquivo)
+		nomeArquivo = sys.argv[1]
+		try:
+			passo, animacao = lerArquivoAnimacao(nomeArquivo)
+		except Exception, e:
+			traceback.print_exc()
+			print "Informe um nome de arquivo válido."
+			sys.exit(1)
 	except Exception, e:
-		traceback.print_exc()
-		print "Informe um nome de arquivo válido."
+		print "Execute o programa com o primeiro argumento como o nome do arquivo"
 		sys.exit(1)
-
+		
 	global fps
 	fps = (1+(20/passo))/time
 	renderizar(passo, animacao)
